@@ -1,0 +1,7 @@
+{
+  "name": "SmartFinance AI - 個人化財務管理系統",
+  "description": "一個整合 AI 建議、預算追蹤與趣味幸運小物的個人化金融管理平台。支持銀行帳戶管理、收支分類紀錄及視覺化報表。",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
