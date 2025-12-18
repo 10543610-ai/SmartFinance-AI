@@ -15,6 +15,9 @@ export enum Category {
   OTHER = '其他'
 }
 
+// Define available view routes for type safety
+export type AppView = 'dashboard' | 'accounts' | 'transactions' | 'budget' | 'dreams' | 'reports';
+
 export interface BankAccount {
   id: string;
   name: string;

@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { BankAccount, Transaction, Budget, DreamAccount, TransactionType, Category } from '../types';
+import { BankAccount, Transaction, Budget, DreamAccount, TransactionType, Category, AppView } from '../types';
 
 interface DashboardProps {
   accounts: BankAccount[];
   transactions: Transaction[];
   budgets: Budget[];
   dreams: DreamAccount[];
-  onNavigate: (view: string) => void;
+  onNavigate: (view: AppView) => void;
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, budgets, dreams, onNavigate }) => {

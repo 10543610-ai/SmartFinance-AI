@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { User, BankAccount, Transaction, Budget, DreamAccount, TransactionType } from './types';
+import { User, BankAccount, Transaction, Budget, DreamAccount, TransactionType, AppView } from './types';
 import { INITIAL_ACCOUNTS, INITIAL_TRANSACTIONS, INITIAL_BUDGETS, INITIAL_DREAMS } from './constants';
 import { loadFromStorage, saveToStorage } from './services/storageService';
 import { auth, db, isFirebaseActive } from './firebase';
@@ -24,7 +24,8 @@ const App: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [dreams, setDreams] = useState<DreamAccount[]>([]);
-  const [currentView, setCurrentView] = useState<'dashboard' | 'accounts' | 'transactions' | 'budget' | 'dreams' | 'reports'>('dashboard');
+  // Use defined AppView type for currentView state
+  const [currentView, setCurrentView] = useState<AppView>('dashboard');
 
   // 初始化登入狀態
   useEffect(() => {
@@ -174,7 +175,7 @@ const App: React.FC = () => {
             ].map((item) => (
               <button
                 key={item.id}
-                onClick={() => setCurrentView(item.id as any)}
+                onClick={() => setCurrentView(item.id as AppView)}
                 className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
                   currentView === item.id 
                     ? 'bg-indigo-600 text-white shadow-md shadow-indigo-100' 
