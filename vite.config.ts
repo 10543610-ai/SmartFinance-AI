@@ -4,10 +4,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: './', // 確保在 GitHub Pages 的子目錄路徑下仍能正確讀取資源，避免白色畫面
   define: {
     'process.env.API_KEY': JSON.stringify(process.env.API_KEY || ''),
-    'process.env.FIREBASE_CONFIG': JSON.stringify(process.env.FIREBASE_CONFIG || '')
   },
   build: {
     minify: 'terser',
@@ -15,6 +14,15 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true
+      }
+    },
+    // 確保輸出的資源路徑正確
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'recharts', 'firebase/app', 'firebase/auth', 'firebase/firestore']
+        }
       }
     }
   }
