@@ -1,16 +1,15 @@
 
 import React from 'react';
-import { BankAccount, Transaction, Budget, DreamAccount, TransactionType, Category, AppView } from '../types';
+import { BankAccount, Transaction, DreamAccount, TransactionType, AppView } from '../types';
 
 interface DashboardProps {
   accounts: BankAccount[];
   transactions: Transaction[];
-  budgets: Budget[];
   dreams: DreamAccount[];
   onNavigate: (view: AppView) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, budgets, dreams, onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, dreams, onNavigate }) => {
   const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
   
   const currentMonth = new Date().getMonth();

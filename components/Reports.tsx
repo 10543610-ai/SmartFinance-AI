@@ -22,7 +22,7 @@ const Reports: React.FC<ReportsProps> = ({ transactions, budgets }) => {
       setIsLoading(false);
     };
     fetchAdvice();
-  }, []);
+  }, [transactions, budgets]);
 
   const expenseData = Object.values(Category).map(cat => {
     const amount = transactions
@@ -60,7 +60,7 @@ const Reports: React.FC<ReportsProps> = ({ transactions, budgets }) => {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {expenseData.map((entry, index) => (
+                  {expenseData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>

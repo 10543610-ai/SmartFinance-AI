@@ -138,7 +138,7 @@ const App: React.FC = () => {
       if (acc.id === t.accountId) {
         return { 
           ...acc, 
-          balance: t.type === 'INCOME' ? acc.balance + t.amount : acc.balance - t.amount 
+          balance: t.type === TransactionType.INCOME ? acc.balance + t.amount : acc.balance - t.amount 
         };
       }
       return acc;
@@ -210,7 +210,7 @@ const App: React.FC = () => {
       <main className="flex-grow overflow-y-auto bg-slate-50 p-4 md:p-8">
         <div className="max-w-6xl mx-auto">
           <div className="animate-in fade-in duration-500">
-            {currentView === 'dashboard' && <Dashboard accounts={accounts} transactions={transactions} budgets={budgets} dreams={dreams} onNavigate={setCurrentView} />}
+            {currentView === 'dashboard' && <Dashboard accounts={accounts} transactions={transactions} dreams={dreams} onNavigate={setCurrentView} />}
             {currentView === 'accounts' && <AccountManager accounts={accounts} setAccounts={(v) => syncData('accounts', v)} />}
             {currentView === 'transactions' && <TransactionManager transactions={transactions} accounts={accounts} onAdd={addTransaction} onDelete={(id) => syncData('transactions', transactions.filter(t => t.id !== id))} />}
             {currentView === 'budget' && <BudgetManager budgets={budgets} setBudgets={(v) => syncData('budgets', v)} />}
