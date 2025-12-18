@@ -2,10 +2,12 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main  # 如果您的預設分支是 master，請改為 master
+      - main
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -18,17 +20,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-
+          # 移除 cache: 'npm' 或 cache: "" 避免 setup-node 尋找 package-lock.json
+          
       - name: Install dependencies
-        run: npm install
+        # 使用 --no-package-lock 避免 npm 因為缺少 lock 檔案而報錯
+        run: npm install --no-package-lock
 
       - name: Build
         run: npm run build
         env:
-          # 注入 Secrets 到建置環境
           API_KEY: ${{ secrets.API_KEY }}
-          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
